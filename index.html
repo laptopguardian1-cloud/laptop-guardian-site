@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Guardian - Know Before You Buy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2E8B57;
+    --green-dark: #23694280;
+    --amber: #E6A700;
+    --red: #C0392B;
+    --bg: #F6F8F5;
+    --ink: #1B2B22;
+    --ink-soft: #4A5C50;
+    --card-bg: #FFFFFF;
+    --max-width: 720px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Top bar */
+  header.topbar {
+    padding: 20px 0;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .wordmark .badge {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  /* Section divider - perforation motif */
+  .perforation {
+    border: none;
+    border-top: 2px dashed #C9D3CC;
+    margin: 0;
+  }
+
+  section { padding: 56px 0; }
+
+  /* Hero */
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+    max-width: 15ch;
+  }
+  .hero p.sub {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 28px 0;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: #C9D3CC; }
+
+  /* Section heading (no all-caps eyebrow tricks - just a clear heading) */
+  h2.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px 0;
+  }
+  p.section-lede {
+    color: var(--ink-soft);
+    margin: 0 0 28px 0;
+    max-width: 52ch;
+  }
+
+  /* Video placeholder - ticket stub styling */
+  .video-slot {
+    aspect-ratio: 16/9;
+    width: 100%;
+    border: 2px dashed #C9D3CC;
+    border-radius: 10px;
+    background: repeating-linear-gradient(135deg, #EEF2ED, #EEF2ED 10px, #E7ECE5 10px, #E7ECE5 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--ink-soft);
+    gap: 6px;
+    padding: 20px;
+  }
+  .video-slot .play-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+  .video-slot .label { font-weight: 600; color: var(--ink); }
+  .video-slot .note { font-size: 0.85rem; }
+
+  /* How it works - real numbered sequence */
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+  .steps li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .steps .num {
+    flex-shrink: 0;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+  }
+  .steps .step-body h3 { margin: 4px 0 4px 0; font-size: 1.05rem; }
+  .steps .step-body p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* What it checks - ticket stub card with mono badges */
+  .checklist {
+    background: var(--card-bg);
+    border: 2px dashed #C9D3CC;
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .checklist ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .checklist li { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .checklist .item-name { font-weight: 500; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: white;
+    white-space: nowrap;
+  }
+  .badge.good { background: var(--green); }
+
+  .checklist .timing {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed #C9D3CC;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 0 60px 0;
+  }
+  footer .contact {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 24px;
+    border: 1px solid #E2E8E4;
+  }
+  footer .contact p { margin: 4px 0; }
+  footer .fine-print {
+    margin-top: 24px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 40px 0; }
+    .cta-row { flex-direction: column; }
+    .btn { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="wordmark">
+      <span class="badge">G</span>
+      Laptop Guardian
+    </div>
+  </div>
+</header>
+
+<hr class="perforation">
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Know before you buy.</h1>
+    <p class="sub">Laptop Guardian is a plug-and-play USB tool that checks a secondhand laptop's battery, storage, RAM, ports, and display — in under 2 minutes, with no technical knowledge needed.</p>
+    <div class="cta-row">
+      <a href="#why" class="btn btn-primary">Watch why it matters</a>
+      <a href="#how" class="btn btn-secondary">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<hr class="perforation">
+
+<section id="why">
+  <div class="wrap">
+    <h2 class="section-title">Why check before you buy</h2>
+    <p class="section-lede">A secondhand laptop can look perfect and still have a battery that's nearly dead, or a drive that's failing. Here's why that matters.</p>
+    <div class="video-slot">
+      <div class="play-icon">&#9654;</div>
+      <div class="label">"Why Laptop Guardian" video</div>
+      <div class="note">~35 second clip — coming soon</div>
+    </div>
+  </div>
+</section>
+
+<hr class="perforation">
+
+<section id="how">
+  <div class="wrap">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-lede">Three steps. No installation, no account, no technical skill required.</p>
+    <ol class="steps">
+      <li>
+        <span class="num">1</span>
+        <span class="step-body">
+          <h3>Plug in the USB</h3>
+          <p>Insert it into the laptop you're checking.</p>
+        </span>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <span class="step-body">
+          <h3>Double-click "Start Laptop Guardian"</h3>
+          <p>Open the USB drive and run the program. Click "Yes" if Windows asks for permission — this is needed to read hardware information.</p>
+        </span>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <span class="step-body">
+          <h3>Get your report</h3>
+          <p>A full health report opens automatically once the check finishes — about a minute later.</p>
+        </span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<hr class="perforation">
+
+<section id="tutorial">
+  <div class="wrap">
+    <h2 class="section-title">Full tutorial</h2>
+    <p class="section-lede">Prefer to watch the whole process start to finish? Here's the complete walkthrough.</p>
+    <div class="video-slot">
+      <div class="play-icon">&#9654;</div>
+      <div class="label">"How to Use Laptop Guardian" tutorial</div>
+      <div class="note">~90 second walkthrough — coming soon</div>
+    </div>
+  </div>
+</section>
+
+<hr class="perforation">
+
+<section id="checks">
+  <div class="wrap">
+    <h2 class="section-title">What it checks</h2>
+    <p class="section-lede">Every audit covers the parts that matter most on a secondhand laptop.</p>
+    <div class="checklist">
+      <ul>
+        <li><span class="item-name">Battery health &amp; cycle count</span><span class="badge good">Good</span></li>
+        <li><span class="item-name">RAM &amp; storage capacity</span><span class="badge good">Good</span></li>
+        <li><span class="item-name">Keyboard, USB &amp; network ports</span><span class="badge good">Good</span></li>
+        <li><span class="item-name">Display — dead pixel test</span><span class="badge good">Good</span></li>
+        <li><span class="item-name">BIOS &amp; graphics information</span><span class="badge good">Good</span></li>
+        <li><span class="item-name">Disk health (SMART status)</span><span class="badge good">Good</span></li>
+      </ul>
+      <div class="timing">Takes about 1-2 minutes, start to finish.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="perforation">
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <p><strong>Questions or want a Laptop Guardian USB?</strong></p>
+      <p>Laptop Guardian</p>
+      <p><a href="mailto:laptopguardian1@gmail.com" style="color:var(--ink); font-weight:600;">laptopguardian1@gmail.com</a></p>
+    </div>
+    <p class="fine-print">Laptop Guardian checks hardware health only. It doesn't guarantee a laptop's condition beyond what the report shows.</p>
+  </div>
+</footer>
+
+</body>
+</html>
