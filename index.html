@@ -4,255 +4,243 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laptop Guardian - Know Before You Buy</title>
+<meta name="description" content="Laptop Guardian is a plug-and-play USB tool that checks a secondhand laptop's battery, storage, RAM, ports and display in under 2 minutes, with no technical knowledge needed.">
+<meta name="theme-color" content="#25774A">
+<meta property="og:title" content="Laptop Guardian - Know Before You Buy">
+<meta property="og:description" content="A plug-and-play USB hardware health check for secondhand laptops. Ready in under 2 minutes.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232E8B57'/%3E%3Cpath d='M21 33l8 8 15-17' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green: #2E8B57;
-    --green-dark: #23694280;
-    --amber: #E6A700;
-    --red: #C0392B;
-    --bg: #F6F8F5;
+    --green: #2E8B57;        /* brand green: dots, icon */
+    --green-deep: #25774A;   /* band, buttons, tags: passes contrast with white text */
     --ink: #1B2B22;
-    --ink-soft: #4A5C50;
-    --card-bg: #FFFFFF;
+    --paper: #F6F8F5;
+    --soft: #EEF2ED;
+    --card: #FFFFFF;
+    --line: #C9D3CC;
+    --muted: #4A5C50;
     --max-width: 720px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #EAF2EC;
+      --paper: #101712;
+      --soft: #18211B;
+      --card: #141C16;
+      --line: #33443A;
+      --muted: #A9BDB0;
+    }
   }
 
   * { box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--paper);
     color: var(--ink);
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    line-height: 1.5;
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
   }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  p { margin: 0 0 1em; }
 
-  .wrap {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+  .wrap.wide { max-width: 980px; }
 
-  /* Top bar */
-  header.topbar {
-    padding: 20px 0;
-  }
-  .wordmark {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: -0.01em;
-  }
+  /* ---------- header + hero: the green band ---------- */
+  .band { background: var(--green-deep); color: #FFFFFF; border-bottom: 2px dashed #FFFFFF; }
+  .band :focus-visible { outline-color: #FFFFFF; }
+
+  .topbar { padding: 20px 0; }
+  .wordmark { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
   .wordmark .badge {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: var(--green);
-    color: white;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #FFFFFF; color: var(--green-deep);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 0.95rem;
   }
 
-  /* Section divider - perforation motif */
-  .perforation {
-    border: none;
-    border-top: 2px dashed #C9D3CC;
-    margin: 0;
-  }
-
-  section { padding: 56px 0; }
-
-  /* Hero */
+  .hero-grid { display: grid; gap: 36px; padding: 20px 0 56px; }
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 2.75rem);
-    line-height: 1.15;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 0 0 16px 0;
-    max-width: 15ch;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.12; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0 0 16px 0; max-width: 15ch;
   }
-  .hero p.sub {
-    font-size: 1.1rem;
-    color: var(--ink-soft);
-    max-width: 46ch;
-    margin: 0 0 28px 0;
-  }
+  .hero p.sub { font-size: 1.1rem; max-width: 46ch; margin: 0 0 28px 0; }
+
   .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
-    display: inline-block;
-    padding: 13px 22px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.98rem;
-    text-decoration: none;
-    border: 2px solid transparent;
-    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 0 22px; border-radius: 6px;
+    font: inherit; font-weight: 600; font-size: 0.98rem; text-decoration: none;
+    border: 2px solid #FFFFFF; cursor: pointer;
   }
-  .btn-primary { background: var(--green); color: white; }
-  .btn-secondary { background: transparent; color: var(--ink); border-color: #C9D3CC; }
+  .btn-primary { background: #FFFFFF; color: var(--green-deep); }
+  .btn-secondary { background: transparent; color: #FFFFFF; }
 
-  /* Section heading (no all-caps eyebrow tricks - just a clear heading) */
-  h2.section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px 0;
+  /* example report: the one memorable element (same device as the Malware Guardian certificate) */
+  .stub {
+    background: #FFFFFF; color: #1B2B22; border: 2px dashed #9DB1A4; border-radius: 10px;
+    width: 100%; max-width: 380px; justify-self: center; padding: 20px 20px 16px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.35); transform: rotate(1.2deg);
   }
-  p.section-lede {
-    color: var(--ink-soft);
-    margin: 0 0 28px 0;
-    max-width: 52ch;
-  }
+  .stub-brand { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: .78rem; letter-spacing: .16em; color: #25774A; }
+  .stub-title { font-weight: 700; font-size: 1.1rem; margin: 4px 0 12px; }
+  .stub ul { list-style: none; margin: 0; padding: 0; }
+  .stub li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px dashed #C9D3CC; font-size: .93rem; font-weight: 500; }
+  .stub .tag { margin: 0; }
+  .stub-note { margin: 12px 0 0; padding-top: 10px; border-top: 2px dashed #C9D3CC; font-size: .75rem; color: #4A5C50; }
 
-  /* Video placeholder - ticket stub styling */
+  /* ---------- sections joined by the perforation line ---------- */
+  main > section { padding: 56px 0; }
+  main > section + section { border-top: 2px dashed var(--line); }
+
+  h2.section-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 8px 0; }
+  p.section-lede { color: var(--muted); margin: 0 0 28px 0; max-width: 52ch; }
+
+  /* video slots */
   .video-slot {
-    aspect-ratio: 16/9;
-    width: 100%;
-    border: 2px dashed #C9D3CC;
-    border-radius: 10px;
-    background: repeating-linear-gradient(135deg, #EEF2ED, #EEF2ED 10px, #E7ECE5 10px, #E7ECE5 20px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--ink-soft);
-    gap: 6px;
-    padding: 20px;
+    aspect-ratio: 16/9; width: 100%;
+    border: 2px dashed var(--line); border-radius: 10px;
+    background: repeating-linear-gradient(135deg, var(--soft), var(--soft) 10px, transparent 10px, transparent 20px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: var(--muted); gap: 6px; padding: 20px; overflow: hidden;
   }
   .video-slot .play-icon {
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    background: var(--green);
-    color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 6px;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--green-deep); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 6px;
   }
   .video-slot .label { font-weight: 600; color: var(--ink); }
   .video-slot .note { font-size: 0.85rem; }
+  .video-slot.live { padding: 0; border-style: solid; background: #000; }
+  .video-slot iframe, .video-slot video { width: 100%; height: 100%; border: 0; display: block; }
 
-  /* How it works - real numbered sequence */
+  /* how it works: a real sequence, so numbers are right */
   .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
-  .steps li {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
+  .steps li { display: flex; gap: 16px; align-items: flex-start; }
   .steps .num {
-    flex-shrink: 0;
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: var(--green);
-    color: white;
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--green-deep); color: #FFFFFF;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.95rem;
+    font-weight: 600; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.95rem;
   }
-  .steps .step-body h3 { margin: 4px 0 4px 0; font-size: 1.05rem; }
-  .steps .step-body p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .steps h3 { margin: 4px 0 4px 0; font-size: 1.05rem; }
+  .steps p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
-  /* What it checks - ticket stub card with mono badges */
-  .checklist {
-    background: var(--card-bg);
-    border: 2px dashed #C9D3CC;
-    border-radius: 10px;
-    padding: 24px;
+  /* what it checks: ticket-stub card */
+  .checklist { background: var(--card); border: 2px dashed var(--line); border-radius: 10px; padding: 8px 24px 24px; }
+  .checklist .sample-note { color: var(--muted); font-size: 0.85rem; margin: 14px 0 4px; }
+  .checklist ul { list-style: none; margin: 0; padding: 0; }
+  .checklist li { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .checklist li:last-child { border-bottom: 0; }
+  .item-name { font-weight: 600; display: block; }
+  .item-desc { color: var(--muted); font-size: 0.93rem; display: block; margin-top: 2px; }
+  .tag {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.8rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 4px; background: var(--green-deep); color: #fff; white-space: nowrap; margin-top: 2px;
   }
-  .checklist ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
-  .checklist li { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .checklist .item-name { font-weight: 500; }
-  .badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 4px;
-    color: white;
-    white-space: nowrap;
-  }
-  .badge.good { background: var(--green); }
+  .timing { margin-top: 6px; padding-top: 18px; border-top: 2px dashed var(--line); color: var(--muted); font-size: 0.92rem; }
 
-  .checklist .timing {
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px dashed #C9D3CC;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-  }
+  /* covers / doesn't cover */
+  .two { display: grid; gap: 28px; }
+  .two h3 { font-size: 1.15rem; margin: 0; }
+  .two ul { margin: 12px 0 0; padding-left: 1.2em; }
+  .two li { margin-bottom: 8px; }
+  .note { margin-top: 24px; padding: 16px 18px; background: var(--soft); border-radius: 10px; font-size: .95rem; }
+  .note a { font-weight: 600; }
 
-  /* Footer */
-  footer {
-    padding: 40px 0 60px 0;
-  }
-  footer .contact {
-    background: var(--card-bg);
-    border-radius: 10px;
-    padding: 20px 24px;
-    border: 1px solid #E2E8E4;
-  }
-  footer .contact p { margin: 4px 0; }
-  footer .fine-print {
-    margin-top: 24px;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
+  .who { display: grid; gap: 20px; }
+  .who h3 { margin: 0 0 4px 0; font-size: 1.05rem; }
+  .who p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
+  details { border-bottom: 1px dashed var(--line); }
+  summary { cursor: pointer; font-weight: 600; padding: 14px 0; }
+  details p { color: var(--muted); margin: 0 0 16px; font-size: 0.97rem; }
+
+  /* footer */
+  footer { padding: 40px 0 60px; border-top: 2px dashed var(--line); }
+  .contact { background: var(--card); border-radius: 10px; padding: 20px 24px; border: 1px solid var(--line); }
+  .contact p { margin: 4px 0; }
+  .contact a.mail { font-weight: 600; }
+  .contact .btn { margin-top: 10px; background: var(--green-deep); color: #FFFFFF; border-color: var(--green-deep); }
+  .family { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 24px; }
+  .family a, .family span.item { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+  .dot.g { background: #2E8B57; }
+  .dot.y { background: #FFC400; box-shadow: 0 0 0 1px #8A6500; }
+  .fine-print { margin-top: 20px; font-size: 0.85rem; color: var(--muted); }
+
+  @media (min-width: 800px) {
+    .hero-grid { grid-template-columns: 1.15fr .85fr; align-items: center; padding-bottom: 72px; }
+    .two { grid-template-columns: 1fr 1fr; gap: 48px; }
+    .who { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 480px) {
-    section { padding: 40px 0; }
+    main > section { padding: 40px 0; }
     .cta-row { flex-direction: column; }
-    .btn { text-align: center; }
+    .checklist { padding: 4px 16px 20px; }
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="wordmark">
-      <span class="badge">G</span>
-      Laptop Guardian
+<header class="band">
+  <div class="wrap wide">
+    <div class="topbar">
+      <div class="wordmark"><span class="badge">G</span>Laptop Guardian</div>
+    </div>
+
+    <div class="hero hero-grid">
+      <div>
+        <h1>Know before you buy.</h1>
+        <p class="sub">Laptop Guardian is a plug-and-play USB tool that checks a secondhand laptop's battery, storage, RAM, ports, and display &mdash; in under 2 minutes, with no technical knowledge needed.</p>
+        <div class="cta-row">
+          <a href="#how" class="btn btn-primary">See how it works</a>
+          <a href="#contact" class="btn btn-secondary">Get Laptop Guardian</a>
+        </div>
+      </div>
+
+      <aside class="stub" aria-label="Example report">
+        <div class="stub-brand">LAPTOP GUARDIAN</div>
+        <div class="stub-title">Health report</div>
+        <ul>
+          <li><span>Display &mdash; dead pixel test</span><span class="tag">Good</span></li>
+          <li><span>Battery health &amp; cycles</span><span class="tag">Good</span></li>
+          <li><span>RAM &amp; storage</span><span class="tag">Good</span></li>
+          <li><span>Keyboard, USB &amp; network</span><span class="tag">Good</span></li>
+          <li><span>BIOS &amp; graphics</span><span class="tag">Good</span></li>
+          <li><span>Disk health (SMART)</span><span class="tag">Good</span></li>
+        </ul>
+        <p class="stub-note">Example only. Your report shows the real results for the laptop you check.</p>
+      </aside>
     </div>
   </div>
 </header>
 
-<hr class="perforation">
+<main>
 
-<section class="hero">
-  <div class="wrap">
-    <h1>Know before you buy.</h1>
-    <p class="sub">Laptop Guardian is a plug-and-play USB tool that checks a secondhand laptop's battery, storage, RAM, ports, and display — in under 2 minutes, with no technical knowledge needed.</p>
-    <div class="cta-row">
-      <a href="#why" class="btn btn-primary">Watch why it matters</a>
-      <a href="#how" class="btn btn-secondary">See how it works</a>
-    </div>
-  </div>
-</section>
-
-<hr class="perforation">
-
-<section id="why">
+<!-- OPTIONAL "why" clip. Off by default: turn it on in the VIDEOS settings at the bottom of this file. -->
+<section id="why" data-video="why" hidden>
   <div class="wrap">
     <h2 class="section-title">Why check before you buy</h2>
     <p class="section-lede">A secondhand laptop can look perfect and still have a battery that's nearly dead, or a drive that's failing. Here's why that matters.</p>
-    <div class="video-slot">
+    <div class="video-slot" data-slot>
       <div class="play-icon">&#9654;</div>
       <div class="label">"Why Laptop Guardian" video</div>
-      <div class="note">~35 second clip — coming soon</div>
+      <div class="note">~35 second clip &mdash; coming soon</div>
     </div>
   </div>
 </section>
-
-<hr class="perforation">
 
 <section id="how">
   <div class="wrap">
@@ -261,75 +249,242 @@
     <ol class="steps">
       <li>
         <span class="num">1</span>
-        <span class="step-body">
+        <span>
           <h3>Plug in the USB</h3>
           <p>Insert it into the laptop you're checking.</p>
         </span>
       </li>
       <li>
         <span class="num">2</span>
-        <span class="step-body">
+        <span>
           <h3>Double-click "Start Laptop Guardian"</h3>
-          <p>Open the USB drive and run the program. Click "Yes" if Windows asks for permission — this is needed to read hardware information.</p>
+          <p>Open the USB drive and run the program. Click "Yes" if Windows asks for permission &mdash; this is needed to read hardware information.</p>
         </span>
       </li>
       <li>
         <span class="num">3</span>
-        <span class="step-body">
+        <span>
           <h3>Get your report</h3>
-          <p>A full health report opens automatically once the check finishes — about a minute later.</p>
+          <p>A full health report opens automatically once the check finishes &mdash; about a minute later.</p>
         </span>
       </li>
     </ol>
   </div>
 </section>
 
-<hr class="perforation">
-
-<section id="tutorial">
+<section id="tutorial" data-video="tutorial">
   <div class="wrap">
     <h2 class="section-title">Full tutorial</h2>
     <p class="section-lede">Prefer to watch the whole process start to finish? Here's the complete walkthrough.</p>
-    <div class="video-slot">
+    <div class="video-slot" data-slot>
       <div class="play-icon">&#9654;</div>
       <div class="label">"How to Use Laptop Guardian" tutorial</div>
-      <div class="note">~90 second walkthrough — coming soon</div>
+      <div class="note">~90 second walkthrough &mdash; coming soon</div>
     </div>
   </div>
 </section>
-
-<hr class="perforation">
 
 <section id="checks">
   <div class="wrap">
     <h2 class="section-title">What it checks</h2>
     <p class="section-lede">Every audit covers the parts that matter most on a secondhand laptop.</p>
     <div class="checklist">
+      <p class="sample-note">Example: how a healthy laptop looks.</p>
       <ul>
-        <li><span class="item-name">Display — dead pixel test</span><span class="badge good">Good</span></li>
-        <li><span class="item-name">Battery health &amp; cycle count</span><span class="badge good">Good</span></li>
-        <li><span class="item-name">RAM &amp; storage capacity</span><span class="badge good">Good</span></li>
-        <li><span class="item-name">Keyboard, USB &amp; network ports</span><span class="badge good">Good</span></li>
-        <li><span class="item-name">BIOS &amp; graphics information</span><span class="badge good">Good</span></li>
-        <li><span class="item-name">Disk health (SMART status)</span><span class="badge good">Good</span></li>
+        <li><span><span class="item-name">Display &mdash; dead pixel test</span><span class="item-desc">Spot dead or stuck pixels on the screen.</span></span><span class="tag">Good</span></li>
+        <li><span><span class="item-name">Battery health &amp; cycle count</span><span class="item-desc">How much capacity is left and how worn the battery is.</span></span><span class="tag">Good</span></li>
+        <li><span><span class="item-name">RAM &amp; storage capacity</span><span class="item-desc">How much memory and storage is really installed.</span></span><span class="tag">Good</span></li>
+        <li><span><span class="item-name">Keyboard, USB &amp; network ports</span><span class="item-desc">Whether the keys and connections respond.</span></span><span class="tag">Good</span></li>
+        <li><span><span class="item-name">BIOS &amp; graphics information</span><span class="item-desc">The laptop's BIOS and graphics hardware details.</span></span><span class="tag">Good</span></li>
+        <li><span><span class="item-name">Disk health (SMART status)</span><span class="item-desc">The drive's own health report, which can warn of a failing disk.</span></span><span class="tag">Good</span></li>
       </ul>
       <div class="timing">Takes about 1-2 minutes, start to finish.</div>
     </div>
   </div>
 </section>
 
-<hr class="perforation">
+<section id="scope">
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <h3>What Laptop Guardian tells you</h3>
+        <ul>
+          <li>The real condition of the battery, storage and memory</li>
+          <li>Whether the display, keyboard and ports work</li>
+          <li>Whether the disk is reporting health problems</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What it doesn't cover</h3>
+        <ul>
+          <li>Malware or security problems</li>
+          <li>Anything beyond what the report shows</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note" id="sister-note">For the security side of a secondhand laptop, there is Malware Guardian, our companion USB tool for checking antivirus, firewall, startup programs and browser settings.</p>
+  </div>
+</section>
 
-<footer>
+<section id="who">
+  <div class="wrap">
+    <h2 class="section-title">Made for people who need an answer</h2>
+    <p class="section-lede">No lectures, no jargon.</p>
+    <div class="who">
+      <div>
+        <h3>Buying a secondhand laptop</h3>
+        <p>Check the hardware before you pay, not after.</p>
+      </div>
+      <div>
+        <h3>NGOs and schools</h3>
+        <p>A simple way to check donated and shared laptops.</p>
+      </div>
+      <div>
+        <h3>Repair shops and sellers</h3>
+        <p>Show a buyer exactly what the report found.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="section-title">Questions people ask</h2>
+    <p class="section-lede">The things that surprise people the first time.</p>
+
+    <details>
+      <summary>Why does Windows ask for permission?</summary>
+      <p>Reading hardware information needs administrator permission. Click "Yes" when Windows asks so the check can see the battery, disk and BIOS details.</p>
+    </details>
+    <details>
+      <summary>How long does it take?</summary>
+      <p>About 1-2 minutes. The report opens by itself when the check finishes.</p>
+    </details>
+    <details>
+      <summary>Can I copy it to another USB stick?</summary>
+      <p>Each Laptop Guardian is locked to its own USB stick and won't start from a different drive.</p>
+    </details>
+    <details>
+      <summary>Does it check for viruses?</summary>
+      <p>No. Laptop Guardian checks hardware health only. Malware Guardian is the companion tool for security checks.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
   <div class="wrap">
     <div class="contact">
       <p><strong>Questions or want a Laptop Guardian USB?</strong></p>
       <p>Laptop Guardian</p>
-      <p><a href="mailto:laptopguardian1@gmail.com" style="color:var(--ink); font-weight:600;">laptopguardian1@gmail.com</a></p>
+      <p id="contact-links"></p>
     </div>
+
+    <div class="family">
+      <span class="item"><span class="dot g"></span>Laptop Guardian</span>
+      <a id="sister-link" href="#"><span class="dot y"></span>Malware Guardian</a>
+    </div>
+
     <p class="fine-print">Laptop Guardian checks hardware health only. It doesn't guarantee a laptop's condition beyond what the report shows.</p>
   </div>
 </footer>
 
+<script>
+  // =====================  EDIT THESE SETTINGS, THEN RE-UPLOAD  =====================
+
+  // How people contact you.
+  // WhatsApp: country code + number, digits only (example: 263771234567). Leave "" to hide.
+  // Email: shown as a link. Leave "" to hide.
+  var CONTACT = { whatsapp: "", email: "laptopguardian1@gmail.com" };
+
+  // Address of the Malware Guardian site. Leave "" to hide the link and the note about it.
+  // (Check this address works after you publish the Malware Guardian site.)
+  var SISTER_SITE = "https://laptopguardian1-cloud.github.io/malware-guardian-site/";
+
+  // The two video sections.
+  //   show: true  -> the section appears. false -> it is hidden completely.
+  //   url:  ""    -> shows the "coming soon" placeholder.
+  //         YouTube: use the EMBED link, like "https://www.youtube.com/embed/VIDEOID"
+  //         Your own file: upload an .mp4 next to index.html and write its name, like "tutorial.mp4"
+  var VIDEOS = {
+    why:      { show: false, url: "" },
+    tutorial: { show: true,  url: "" }
+  };
+
+  // ==================================================================================
+
+  (function () {
+    // ----- videos -----
+    Object.keys(VIDEOS).forEach(function (key) {
+      var section = document.querySelector('[data-video="' + key + '"]');
+      if (!section) { return; }
+      var cfg = VIDEOS[key];
+      if (!cfg.show) { section.hidden = true; return; }
+      section.hidden = false;
+      if (!cfg.url) { return; }
+
+      var slot = section.querySelector("[data-slot]");
+      slot.className = "video-slot live";
+      slot.innerHTML = "";
+      var el;
+      if (/\.(mp4|webm)$/i.test(cfg.url)) {
+        el = document.createElement("video");
+        el.controls = true;
+        el.preload = "metadata";
+        el.src = cfg.url;
+      } else {
+        el = document.createElement("iframe");
+        el.src = cfg.url;
+        el.title = key === "why" ? "Why Laptop Guardian" : "How to use Laptop Guardian";
+        el.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture";
+        el.allowFullscreen = true;
+        el.loading = "lazy";
+      }
+      slot.appendChild(el);
+    });
+
+    // ----- sister site link -----
+    var sister = document.getElementById("sister-link");
+    var note = document.getElementById("sister-note");
+    if (SISTER_SITE) {
+      sister.href = SISTER_SITE;
+      var inline = document.createElement("a");
+      inline.href = SISTER_SITE;
+      inline.textContent = "Malware Guardian";
+      note.innerHTML = "";
+      note.appendChild(document.createTextNode("For the security side of a secondhand laptop, there is "));
+      note.appendChild(inline);
+      note.appendChild(document.createTextNode(", our companion USB tool for checking antivirus, firewall, startup programs and browser settings."));
+    } else {
+      sister.parentNode.removeChild(sister);
+      note.parentNode.removeChild(note);
+    }
+
+    // ----- contact -----
+    var box = document.getElementById("contact-links");
+    var count = 0;
+
+    if (CONTACT.email) {
+      var a = document.createElement("a");
+      a.className = "mail";
+      a.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Laptop Guardian");
+      a.textContent = CONTACT.email;
+      box.appendChild(a);
+      count++;
+    }
+    var wa = (CONTACT.whatsapp || "").replace(/\D/g, "");
+    if (wa) {
+      if (count > 0) { box.appendChild(document.createElement("br")); }
+      var b = document.createElement("a");
+      b.className = "btn";
+      b.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Hello, I would like to know more about Laptop Guardian.");
+      b.textContent = "Message us on WhatsApp";
+      box.appendChild(b);
+      count++;
+    }
+    if (count === 0) { box.textContent = "Ordering details are coming soon."; }
+  })();
+</script>
 </body>
 </html>
