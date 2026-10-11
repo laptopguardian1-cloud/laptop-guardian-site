@@ -69,6 +69,29 @@
     font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 0.95rem;
   }
 
+  /* ---------- family switcher: the three Guardian tools, top right ---------- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; }
+  .guardians { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+  .gicon {
+    width: 34px; height: 34px; border-radius: 50%; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid currentColor;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; line-height: 1;
+    transition: transform .12s ease;
+  }
+  .gicon.l { background: #25774A; color: #FFFFFF; }
+  .gicon.m { background: #FFC400; color: #16150F; }
+  .gicon.i { background: #4DB3FF; color: #16150F; }
+  a.gicon:hover { transform: translateY(-2px); }
+  .gicon.current { box-shadow: 0 0 0 3px #FFFFFF; cursor: default; }
+  @media (prefers-reduced-motion: reduce) { a.gicon { transition: none; } a.gicon:hover { transform: none; } }
+  @media (max-width: 420px) {
+    .gicon { width: 30px; height: 30px; font-size: 0.85rem; }
+    .guardians { gap: 6px; }
+    .topbar .wordmark { font-size: 1rem; }
+  }
+
   .hero-grid { display: grid; gap: 36px; padding: 20px 0 56px; }
   .hero h1 {
     font-size: clamp(2rem, 6vw, 3rem);
@@ -171,13 +194,14 @@
   footer { padding: 40px 0 60px; border-top: 2px dashed var(--line); }
   .contact { background: var(--card); border-radius: 10px; padding: 20px 24px; border: 1px solid var(--line); }
   .contact p { margin: 4px 0; }
-  .contact a.mail { font-weight: 600; }
+  .contact a.mail { font-weight: 600;  overflow-wrap: anywhere; }
   .contact .btn { margin-top: 10px; background: var(--green-deep); color: #FFFFFF; border-color: var(--green-deep); }
   .family { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 24px; }
   .family a, .family span.item { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
   .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
   .dot.g { background: #2E8B57; }
   .dot.y { background: #FFC400; box-shadow: 0 0 0 1px #8A6500; }
+  .dot.b { background: #4DB3FF; box-shadow: 0 0 0 1px #1B5F9E; }
   .fine-print { margin-top: 20px; font-size: 0.85rem; color: var(--muted); }
 
   @media (min-width: 800px) {
@@ -197,7 +221,12 @@
 <header class="band">
   <div class="wrap wide">
     <div class="topbar">
-      <div class="wordmark"><span class="badge">G</span>Laptop Guardian</div>
+      <div class="wordmark"><span class="badge">L</span>Laptop Guardian</div>
+      <nav class="guardians" aria-label="The Guardian tools">
+        <span class="gicon l current" aria-current="page" title="Laptop Guardian (this page)" aria-label="Laptop Guardian (this page)">L</span>
+        <a class="gicon m" id="sister-icon" href="https://laptopguardian1-cloud.github.io/malware-guardian-site/" title="Malware Guardian" aria-label="Malware Guardian">M</a>
+        <a class="gicon i" id="internet-icon" href="https://laptopguardian1-cloud.github.io/internet-guardian-site/" title="Internet Guardian" aria-label="Internet Guardian">I</a>
+      </nav>
     </div>
 
     <div class="hero hero-grid">
@@ -384,6 +413,7 @@
     <div class="family">
       <span class="item"><span class="dot g"></span>Laptop Guardian</span>
       <a id="sister-link" href="#"><span class="dot y"></span>Malware Guardian</a>
+      <a id="internet-link" href="#"><span class="dot b"></span>Internet Guardian</a>
     </div>
 
     <p class="fine-print">Laptop Guardian checks hardware health only. It doesn't guarantee a laptop's condition beyond what the report shows.</p>
@@ -401,6 +431,9 @@
   // Address of the Malware Guardian site. Leave "" to hide the link and the note about it.
   // (Check this address works after you publish the Malware Guardian site.)
   var SISTER_SITE = "https://laptopguardian1-cloud.github.io/malware-guardian-site/";
+
+  // Address of the Internet Guardian site. Leave "" to hide its icon and footer link.
+  var INTERNET_SITE = "https://laptopguardian1-cloud.github.io/internet-guardian-site/";
 
   // The two video sections.
   //   show: true  -> the section appears. false -> it is hidden completely.
@@ -460,6 +493,16 @@
       sister.parentNode.removeChild(sister);
       note.parentNode.removeChild(note);
     }
+
+    // ----- the other Guardian tools: top-right icons and footer links -----
+    function wire(id, url) {
+      var el = document.getElementById(id);
+      if (!el) { return; }
+      if (url) { el.href = url; } else { el.parentNode.removeChild(el); }
+    }
+    wire("sister-icon", SISTER_SITE);
+    wire("internet-icon", INTERNET_SITE);
+    wire("internet-link", INTERNET_SITE);
 
     // ----- contact -----
     var box = document.getElementById("contact-links");
